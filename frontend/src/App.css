@@ -53,6 +53,10 @@ input::file-selector-button { padding: 10px 12px; margin-right: 12px; border: 1p
 .documents-section { margin-top: 36px; }
 .section-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; }
 .document-count { font-size: 13px; color: var(--muted); }
+.document-filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 240px); gap: 12px; margin-bottom: 18px; }
+.document-filters label { display: grid; gap: 6px; color: var(--muted); font-size: 13px; font-weight: 600; }
+.document-filters input, .document-filters select { width: 100%; min-width: 0; min-height: 44px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 4px; background: #fff; color: #23342f; }
+.document-filters select { cursor: pointer; }
 .document-list { list-style: none; padding: 0; margin: 0; }
 .document-row { display: flex; align-items: center; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); }
 .file-badge { display: grid; place-items: center; width: 48px; height: 56px; flex-shrink: 0; border: 1px solid var(--border); border-top: 3px solid #be711e; border-radius: 4px; background: #fff; color: #725126; font-size: 11px; font-weight: 700; }
@@ -70,6 +74,7 @@ input::file-selector-button { padding: 10px 12px; margin-right: 12px; border: 1p
   h1 { font-size: 25px; }
   .upload-section { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .upload-controls { align-items: stretch; flex-direction: column; }
+  .document-filters { grid-template-columns: minmax(0, 1fr); }
   .document-row { flex-wrap: wrap; gap: 12px; }
   .document-details { flex-basis: calc(100% - 60px); }
   .download-action { margin-left: 60px; max-width: calc(100% - 60px); }
