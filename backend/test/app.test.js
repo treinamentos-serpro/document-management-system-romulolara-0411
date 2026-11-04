@@ -80,6 +80,21 @@ test('API de documentos com armazenamento local', async (context) => {
     assert.strictEqual((await readdir(storageDirectory)).length, initialFiles.size + 1);
   });
 
+  await context.test('upload rejeita campos extras e múltiplos arquivos sem deixar arquivos órfãos', async () => {
+    const withExtraField = new FormData();
+    withExtraField.append('file', new Blob([content]), 'campo-extra.txt');
+    withExtraField.append('metadata', 'não permitido');
+    const fieldResponse = await fetch(`${baseUrl}/upload`, { method: 'POST', body: withExtraField });
+    assert.strictEqual(fieldResponse.status, 400);
+
+    const withExtraFile = new FormData();
+    withExtraFile.append('file', new Blob([content]), 'primeiro.txt');
+    withExtraFile.append('file', new Blob([content]), 'segundo.txt');
+    const fileResponse = await fetch(`${baseUrl}/upload`, { method: 'POST', body: withExtraFile });
+    assert.strictEqual(fileResponse.status, 400);
+    assert.strictEqual((await readdir(storageDirectory)).length, initialFiles.size + 1);
+  });
+
   await context.test('arquivo acima do limite retorna 413 e não permanece no disco', async () => {
     const limit = Number(process.env.DMS_MAX_FILE_SIZE || 10 * 1024 * 1024);
     const form = new FormData();
