@@ -3,6 +3,10 @@ description: Agente de planejamento que pesquisa o codebase e gera um plano de i
 name: planner
 tools: ['search', 'codebase', 'usages']
 handoffs:
+  - label: Gerar tarefas
+    agent: planner
+    prompt: Siga as instruções de .github/prompts/gerar-tarefas.prompt.md para detalhar o plano mais recente acima em tarefas, respeitando a ordem das dependências e as prioridades. Apenas apresente as tarefas, sem implementar.
+    send: false
   - label: Iniciar implementação
     agent: agent
     prompt: Implemente o plano descrito acima, seguindo as camadas do backend e as convenções do projeto.

@@ -1,0 +1,82 @@
+:root {
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  color: #23342f;
+  background: #f5f7f6;
+  font-synthesis: none;
+  --accent: #17684d;
+  --muted: #64716c;
+  --border: #dce3df;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 280px; }
+button, input { font: inherit; }
+button {
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { background: #10513c; }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+:focus-visible { outline: 3px solid #b66b16; outline-offset: 3px; }
+.app-shell { max-width: 1100px; margin: auto; padding: 48px 32px; }
+.app-header { display: flex; align-items: center; gap: 20px; margin-bottom: 48px; }
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  background: var(--accent);
+  color: white;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.section-label { margin: 0 0 8px; color: var(--muted); font-size: 11px; font-weight: 700; }
+h1 { margin: 0; font-size: 30px; font-weight: 650; }
+h2 { margin: 0; font-size: 21px; font-weight: 650; }
+.upload-section { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; padding: 28px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+form label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+.upload-controls { display: flex; align-items: center; gap: 16px; }
+.upload-controls input { flex: 1; min-width: 0; width: 100%; color: var(--muted); font-size: 14px; }
+input::file-selector-button { padding: 10px 12px; margin-right: 12px; border: 1px solid var(--border); border-radius: 4px; background: #fff; color: #23342f; cursor: pointer; }
+.upload-controls button { flex-shrink: 0; }
+.error-message, .success-message { font-size: 14px; overflow-wrap: anywhere; }
+.error-message { color: #a52a2a; }
+.success-message { color: var(--accent); margin-bottom: 0; }
+.success-message:empty { margin: 0; }
+.documents-section { margin-top: 36px; }
+.section-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 24px; }
+.document-count { font-size: 13px; color: var(--muted); }
+.document-filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 240px); gap: 12px; margin-bottom: 18px; }
+.document-filters label { display: grid; gap: 6px; color: var(--muted); font-size: 13px; font-weight: 600; }
+.document-filters input, .document-filters select { width: 100%; min-width: 0; min-height: 44px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 4px; background: #fff; color: #23342f; }
+.document-filters select { cursor: pointer; }
+.document-list { list-style: none; padding: 0; margin: 0; }
+.document-row { display: flex; align-items: center; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); }
+.file-badge { display: grid; place-items: center; width: 48px; height: 56px; flex-shrink: 0; border: 1px solid var(--border); border-top: 3px solid #be711e; border-radius: 4px; background: #fff; color: #725126; font-size: 11px; font-weight: 700; }
+.document-details { flex: 1; min-width: 0; }
+.document-details h3 { margin: 0 0 8px; font-size: 16px; font-weight: 600; overflow-wrap: anywhere; }
+.document-metadata { display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.download-action { max-width: 200px; flex-shrink: 0; }
+.secondary-button { background: #fff; border-color: var(--border); color: var(--accent); }
+.secondary-button:hover:not(:disabled) { background: #e6efe9; }
+.empty-state { padding: 40px 0; margin: 0; color: var(--muted); }
+
+@media (max-width: 700px) {
+  .app-shell { padding: 28px 20px; }
+  .app-header { gap: 14px; margin-bottom: 32px; }
+  h1 { font-size: 25px; }
+  .upload-section { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .upload-controls { align-items: stretch; flex-direction: column; }
+  .document-filters { grid-template-columns: minmax(0, 1fr); }
+  .document-row { flex-wrap: wrap; gap: 12px; }
+  .document-details { flex-basis: calc(100% - 60px); }
+  .download-action { margin-left: 60px; max-width: calc(100% - 60px); }
+  .section-heading { flex-wrap: wrap; }
+}
