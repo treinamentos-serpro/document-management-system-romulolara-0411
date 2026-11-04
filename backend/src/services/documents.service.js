@@ -1,6 +1,21 @@
 const { randomUUID } = require('node:crypto');
 const repository = require('../repositories/documents.repository');
 
+function createServiceError(message, status) {
+  return Object.assign(new Error(message), { status });
+}
+
+function createDocument(file) {
+  return {
+    id: randomUUID(),
+    originalName: file.originalname,
+    size: file.size,
+    uploadedAt: new Date().toISOString(),
+    owner: process.env.DMS_DEFAULT_OWNER || 'default',
+    filePath: file.path,
+  };
+}
+
 function toMetadata(document) {
   const { id, originalName, size, uploadedAt, owner } = document;
   return { id, originalName, size, uploadedAt, owner };
@@ -8,19 +23,11 @@ function toMetadata(document) {
 
 async function upload(file) {
   if (!file) {
-    throw Object.assign(new Error('Envie um arquivo no campo file.'), { status: 400 });
+    throw createServiceError('Envie um arquivo no campo file.', 400);
   }
 
   try {
-    const document = repository.save({
-      id: randomUUID(),
-      originalName: file.originalname,
-      size: file.size,
-      uploadedAt: new Date().toISOString(),
-      owner: process.env.DMS_DEFAULT_OWNER || 'default',
-      filePath: file.path,
-    });
-    return toMetadata(document);
+    return toMetadata(repository.save(createDocument(file)));
   } catch (error) {
     await repository.removeFile(file.path);
     throw error;
@@ -34,7 +41,7 @@ function list() {
 function getDownload(id) {
   const document = repository.findById(id);
   if (!document) {
-    throw Object.assign(new Error('Documento não encontrado.'), { status: 404 });
+    throw createServiceError('Documento não encontrado.', 404);
   }
   return { filePath: document.filePath, originalName: document.originalName };
 }
