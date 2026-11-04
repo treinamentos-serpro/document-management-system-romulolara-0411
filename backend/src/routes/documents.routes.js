@@ -25,7 +25,7 @@ const upload = multer({
       callback(null, randomUUID());
     },
   }),
-  limits: { fileSize: configuredLimit, files: 1 },
+  limits: { fileSize: configuredLimit, files: 1, fields: 0, parts: 2 },
   fileFilter(req, file, callback) {
     if (!allowedExtensions.has(path.extname(file.originalname).toLowerCase())) {
       return callback(Object.assign(new Error('Tipo de arquivo não permitido.'), { status: 400 }));

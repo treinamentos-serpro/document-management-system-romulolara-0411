@@ -39,8 +39,11 @@ export default function App() {
         </div>
       </header>
       <UploadComponent
-        disabled={isLoading || Boolean(error)}
-        onUploaded={(document) => setDocuments((current) => [...current, document])}
+        disabled={isLoading}
+        onUploaded={(document) => {
+          setDocuments((current) => [document, ...current]);
+          setError('');
+        }}
       />
       <DocumentList
         documents={documents}
